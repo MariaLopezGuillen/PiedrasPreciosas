@@ -4,18 +4,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
-        crossorigin="anonymous"></script>
+    <title><%- title %></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/style.css">
 </head>
 
 <body>
     <%- include('layouts/navbar') %>
-        <h1>holaaa</h1>
+        <!-- Cards -->
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <div class="card">
+                    <img src="src\public\img\diamante.jpg" class="card-img-top" alt="Foto de Diamante">
+                    <div class="card-body">
+                        <h5 class="card-title">Diamante</h5>
+                        <p class="card-text">El diamante es un mineral compuesto por carbono puro cristalizado. De color
+                            transparente, su gran dispersión refractaria le permite dispersar la luz en múltiples
+                            colores. Presenta los máximos niveles de dureza (10/10 en la escala Mosh) y conductividad
+                            térmica. Actualmente, los principales depósitos de esta gema están en Botsuana, República
+                            Democrática del Congo, Rusia y Australia.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <img src="..." class="card-img-top" alt="Foto de Rubí">
+                    <div class="card-body">
+                        <h5 class="card-title">Rubí</h5>
+                        <p class="card-text">El rubí es una variedad del corindón que se distingue fácilmente por su
+                            color rojo brillante. Tiene una dureza 9 en la escala de Mohs. Se trata de una de las gemas
+                            más raras y apreciadas que existen. Las minas más importantes se hallan en Myanmar, aunque
+                            también es posible encontrarlo en Pakistán, Mozambique y Australia.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Esmeralda </h5>
+                        <p class="card-text">La esmeralda es una variedad de berilio caracterizada por un intenso color
+                            verde. Su dureza oscila entre el 7.5 y el 8 en la escala de Mohs. Las piezas de mayor valor
+                            y escasez son las más transparentes. Los principales yacimientos se encuentran en Colombia y
+                            Afganistán, si bien piezas de menor calidad se han minado en India, Brasil, Rusia y Egipto.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Zafiro </h5>
+                        <p class="card-text">El zafiro es, al igual que el rubí, una variedad de corindón. Su color
+                            característico (y el más valioso) es el azul profundo, pero es posible encontrarlo con
+                            diversas tonalidades y matices (amarillo, blanco, violeta, marrón, etc.). Tiene una dureza 9
+                            en la escala de Mohs. Los principales productores de esta gema se encuentran en Madagascar,
+                            Tanzania y Sri Lanka.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
 </body>
 
 </html>
