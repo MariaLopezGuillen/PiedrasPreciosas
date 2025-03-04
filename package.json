@@ -1,0 +1,32 @@
+{
+  "name": "piedraspreciosas",
+  "version": "1.0.0",
+  "description": "Proyecto Final de Express",
+  "keywords": [
+    "express",
+    "nodejs"
+  ],
+  "homepage": "https://github.com/MariaLopezGuillen/PiedrasPreciosas#readme",
+  "bugs": {
+    "url": "https://github.com/MariaLopezGuillen/PiedrasPreciosas/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MariaLopezGuillen/PiedrasPreciosas.git"
+  },
+  "license": "MIT",
+  "author": "MariaLG",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/index.js"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
