@@ -1,15 +1,13 @@
-'use strict'
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const piedraSchema = new Schema({
-    id: {
-        type: { Number, required: true },
-        nombre: { type: String, required: true },
-        descripcion: { type: String, required: true },
-        imagen: { type: String, required: false }
-    }
 
+const piedraSchema = new Schema({
+    nombre: String,
+    descripcion: String,
+    foto: Object
 });
-//Creacion del modelo
-const piedras = mongoose.model('piedras', piedraSchema, "Piedras");
-module.exports = piedras;
+
+// Crear el modelo
+const Piedra = mongoose.model('Piedra', piedraSchema);
+
+module.exports = Piedra;

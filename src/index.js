@@ -12,7 +12,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => res.render('index', { title: 'Joyas Preciosas' }));
 app.get('/inicio', (req, res) => res.render('index', { title: 'Joyas Preciosas' }));
 app.get('/contacto', (req, res) => res.render('contact', { title: 'Contacto-Joyas Preciosas' }));
-app.get('/populares', (req, res) => res.render('populares', { title: 'Populares-Joyas Preciosas' }));
+app.get('/crear', (req, res) => res.render('crear', { title: 'Crear-Joyas Preciosas' }));
+
 // Manejo de errores 404
 app.use((req, res) => {
     res.status(404).render('404', {
@@ -23,3 +24,4 @@ app.use((req, res) => {
 app.use(express.static('public'))
 
 app.listen(3000, () => console.log('Servidor corriendo en el puerto 3000'));
+
