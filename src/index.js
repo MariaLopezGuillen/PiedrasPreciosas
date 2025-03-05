@@ -1,14 +1,54 @@
 const express = require('express');
 const path = require('path');
-const { title } = require('process');
-
+const mongoose = require('mongoose');
+const session = require('express-session');
+const flash = require('connect-flash');
+const multer = require('multer');
 const app = express();
 
+// Configuración de MongoDB
+const uri = "mongodb+srv://maria:Piedras123@piedras.sei4o.mongodb.net/?retryWrites=true&w=majority&appName=Piedras";
+mongoose.connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(() => {
+    console.log("Conexión a MongoDB exitosa");
+}).catch(err => {
+    console.error("Error conectando a MongoDB:", err);
+});
 
-// Configurar la carpeta de vistas con ruta relativa
+// Configuración de Multer para subir imágenes
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, './public/img/uploads');
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + '-' + file.originalname);
+    }
+});
+const upload = multer({ storage });
+
+// Middleware
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+}));
+app.use(flash());
+app.use((req, res, next) => {
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    next();
+});
+
+// Configurar la carpeta de vistas y archivos estáticos
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Rutas
 app.get('/', (req, res) => res.render('index', { title: 'Joyas Preciosas' }));
 app.get('/inicio', (req, res) => res.render('index', { title: 'Joyas Preciosas' }));
 app.get('/contacto', (req, res) => res.render('contact', { title: 'Contacto-Joyas Preciosas' }));
@@ -21,35 +61,6 @@ app.use((req, res) => {
         descripcion: "Página no encontrada"
     });
 });
-app.use(express.static('public'))
 
+// Iniciar servidor
 app.listen(3000, () => console.log('Servidor corriendo en el puerto 3000'));
-
-// Configuración de MongoDB
-
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://maria:Piedras123@piedras.sei4o.mongodb.net/?retryWrites=true&w=majority&appName=Piedras";
-
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
-const client = new MongoClient(uri, {
-    serverApi: {
-        version: ServerApiVersion.v1,
-        strict: true,
-        deprecationErrors: true,
-    }
-});
-
-async function run() {
-    try {
-        // Connect the client to the server	(optional starting in v4.7)
-        await client.connect();
-        // Send a ping to confirm a successful connection
-        await client.db("admin").command({ ping: 1 });
-        console.log("Pinged your deployment. You successfully connected to MongoDB!");
-    } finally {
-        // Ensures that the client will close when you finish/error
-        await client.close();
-    }
-}
-run().catch(console.dir);
-
