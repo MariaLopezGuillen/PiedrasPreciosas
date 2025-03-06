@@ -1,0 +1,22 @@
+<%- include('layouts/navbar') %>
+
+<div class="container">
+  <h2>Crear una Piedra Preciosa</h2>
+  <form action="/piedra" class="my-2" method="POST">
+    <input type="number" placeholder="Id" class="form-control my-2" name="id" />
+    <input
+      type="text"
+      placeholder="Nombre"
+      class="form-control my-2"
+      name="nombre"
+    />
+    <input
+      type="text"
+      placeholder="Descripcion"
+      class="form-control my-2"
+      name="descripcion"
+    />
+    <button type="submit" class="btn btn-primary">Agregar</button>
+  </form>
+</div>
+<%- include('layouts/footer') %>
