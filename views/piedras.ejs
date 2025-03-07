@@ -1,0 +1,26 @@
+<% arraypiedras.forEach(piedra=> { %>
+  <tr>
+    <th scope="row">
+      <%= piedra.id %>
+    </th>
+    <td>
+      <%= piedra.nombre %>
+    </td>
+    <td>
+      <%= piedra.tipo %>
+    </td>
+    <td>
+      <%= piedra.descripcion %>
+    </td>
+    <td>
+      <% if (piedra.foto) { %>
+        <img src="<%= piedra.foto %>" alt="Foto de <%= piedra.nombre %>" width="100">
+        <% } else { %>
+          Sin foto
+          <% } %>
+    </td>
+    <td>
+      <a class="btn btn-warning btn-sm" href="/piedras/<%= piedra._id %>">Editar/Eliminar</a>
+    </td>
+  </tr>
+  <% }) %>

@@ -1,0 +1,106 @@
+<%- include("template/cabecera", {tituloWeb: 'Detalles de la Piedra Preciosa' }) %>
+
+    <div class="container mt-4">
+        <h1 class="text-center">Detalles de la Piedra Preciosa</h1>
+
+        <% if (error) { %>
+            <div class="alert alert-danger">
+                <%= mensaje %>
+            </div>
+            <a href="/piedras" class="btn btn-dark w-100 my-2">Volver</a>
+            <% } else { %>
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <form id="editar" data-id="<%= piedras._id %>" class="p-4 border rounded shadow bg-light">
+                            <div class="mb-3">
+                                <label for="idInput" class="form-label">ID</label>
+                                <input type="number" value="<%= piedras.id %>" class="form-control" name="id"
+                                    id="idInput" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="nombreInput" class="form-label">Nombre</label>
+                                <input type="text" value="<%= piedras.nombre %>" class="form-control" name="nombre"
+                                    id="nombreInput" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="tipoInput" class="form-label">Tipo</label>
+                                <input type="text" value="<%= piedras.tipo %>" class="form-control" name="tipo"
+                                    id="tipoInput" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="descripcionInput" class="form-label">Descripción</label>
+                                <input type="text" value="<%= piedras.descripcion %>" class="form-control"
+                                    name="descripcion" id="descripcionInput" required>
+                            </div>
+                            <button class="btn btn-primary w-100" type="submit">Actualizar</button>
+                        </form>
+
+                        <button class="btn btn-danger w-100 mt-3" id="eliminar"
+                            data-id="<%= piedras._id %>">Eliminar</button>
+                        <a href="/piedras" class="btn btn-secondary w-100 mt-3">Volver</a>
+                    </div>
+                </div>
+                <% } %>
+    </div>
+
+    <%- include("template/footer") %>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const btnEliminar = document.getElementById('eliminar');
+                if (btnEliminar) {
+                    btnEliminar.addEventListener('click', async () => {
+                        const id = btnEliminar.dataset.id;
+                        console.log('Eliminando ID:', id);
+                        try {
+                            const data = await fetch(`/piedras/${id}`, {
+                                method: 'DELETE',
+                                headers: { 'Content-Type': 'application/json' }
+                            });
+                            const res = await data.json();
+                            console.log(res);
+                            if (res.estado) {
+                                window.location.href = '/piedras';
+                            } else {
+                                alert(res.mensaje);
+                            }
+                        } catch (error) {
+                            console.log('Error al eliminar:', error);
+                        }
+                    });
+                }
+
+                const formEditar = document.querySelector('#editar');
+                if (formEditar) {
+                    formEditar.addEventListener('submit', async (e) => {
+                        e.preventDefault();
+
+                        const _id = formEditar.dataset.id;
+                        const id = document.getElementById('idInput').value;
+                        const nombre = document.getElementById('nombreInput').value;
+                        const tipo = document.getElementById('tipoInput').value;
+                        const descripcion = document.getElementById('descripcionInput').value;
+
+                        console.log('Editando ID:', _id);
+
+                        try {
+                            const data = await fetch(`/piedras/${_id}`, {
+                                method: 'PUT',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ id, nombre, tipo, descripcion })
+                            });
+
+                            const res = await data.json();
+                            console.log(res);
+                            if (res.estado) {
+                                window.location.href = '/piedras';
+                            } else {
+                                alert(res.mensaje);
+                            }
+                        } catch (error) {
+                            console.log('Error al actualizar:', error);
+                        }
+                    });
+                }
+            });
+        </script>
